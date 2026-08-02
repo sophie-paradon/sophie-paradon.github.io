@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sophie Paradon — Data Analyst</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text
+y=%22.9em%22 font-size=%2290%22>📊</text></s
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,7 +15,7 @@
   }
   [data-theme="dark"] {
     --bg: #131120; --text: #f1f0fa; --text-dim: #c7c3dd; --text-faint: #9490ac;
-    --card-bg: #1d1a2e; --card-border: #322c4a; --nav-bg: rgba(19,17,32,0.75);
+    --card-bg: #1d1a2e; --card-border: #322c.75);
     --shadow: rgba(0,0,0,0.35);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +26,7 @@
 
   .topnav {
     position: sticky; top: 0; z-index: 50;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; just
     padding: 14px 28px; background: var(--nav-bg); backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--card-border);
   }
@@ -34,7 +35,7 @@
   .topnav a.navlink { color: var(--text-dim); text-decoration: none; font-size: 13.5px; font-weight: 600; }
   .topnav a.navlink:hover { color: #7c3aed; }
   .theme-toggle {
-    width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--card-border);
+    width: 32px; height: 32px; border-radius--card-border);
     background: var(--card-bg); cursor: pointer; font-size: 14px;
     display: flex; align-items: center; justify-content: center;
   }
@@ -43,7 +44,7 @@
     position: relative; overflow: hidden;
     background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
     background-size: 200% 200%;
-    animation: gradientShift 12s ease infinite;
+  animation: gradientShift 12s ease infinite;
     color: white; padding: 68px 24px 60px; text-align: center;
   }
   @keyframes gradientShift {
@@ -54,7 +55,7 @@
     animation: float 8s ease-in-out infinite;
   }
   .header::before { width: 320px; height: 320px; top: -160px; left: -80px; }
-  .header::after { width: 220px; height: 220px; bottom: -140px; right: -40px; animation-delay: -4s; }
+  .header::after { width: 220px; height: 2200px; animation-delay: -4s; }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(18px); } }
 
   .avatar {
@@ -67,34 +68,40 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   }
   .header h1 { position: relative; z-index: 1; font-size: 34px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
-  .header p.tagline { position: relative; z-index: 1; font-size: 16px; opacity: 0.92; margin-bottom: 26px; }
+  .header p.tagline { position: relative; z-acity: 0.92; margin-bottom: 26px; }
 
-  .skills-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 560px; margin: 0 auto 28px; }
+  .skills-row { position: relative; z-index: wrap; gap: 8px; justify-content: center;max-width: 560px; margin: 0 auto 28px; }
   .skill-pill {
     background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3);
     border-radius: 20px; padding: 5px 14px; font-size: 12.5px; font-weight: 600;
   }
-  .hero-ctas { position: relative; z-index: 1; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero-ctas { position: relative; z-index: justify-content: center; flex-wrap: wrap; }
   .hero-ctas a {
     text-decoration: none; font-size: 13.5px; font-weight: 700; padding: 10px 20px; border-radius: 9px;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.15s ease, opacit
   }
   .hero-ctas a:hover { transform: translateY(-2px); }
   .hero-ctas a.primary { background: white; color: #7c3aed; }
-  .hero-ctas a.secondary { background: rgba(255,255,255,0.14); color: white; border: 1px solid rgba(255,255,255,0.4); }
-
-  .container { max-width: 900px; margin: 0 auto; padding: 60px 24px 24px; }
+  .hero-ctas a.secondary { background: rgba(255,255,255,0.14); color: white; border: 1px solid rgba(255,255,255,0.4);
+}
+.container { max-width: 900px; margin: 0 auto; padding: 60px 24px 24px; }
   h2.section-title {
     font-size: 13px; font-weight: 700; color: #7c3aed; text-transform: uppercase;
     letter-spacing: 1.5px; margin-bottom: 28px; text-align: center;
   }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .skills-grid { display: grid; grid-templatinmax(220px, 1fr)); gap: 16px; margin-bottom: 12px; }
   .skill-card {
     background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
     padding: 18px; text-align: center;
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, border-color 0.3s ease;
+    animation: fadeInUp 0.6s ease both;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
-  .skill-card.visible { opacity: 1; transform: translateY(0); }
   .skill-card .icon { font-size: 24px; margin-bottom: 8px; }
   .skill-card h4 { font-size: 13.5px; margin-bottom: 4px; }
   .skill-card p { font-size: 11.5px; color: var(--text-faint); }
@@ -104,18 +111,21 @@
 
   .card {
     background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px;
-    padding: 26px; border-left: 4px solid var(--accent, #7c3aed);
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease, background 0.3s ease;
-    transform-style: preserve-3d; will-change: transform;
+    padding: 26px; border-left: 4px solid va
+    animation: fadeInUp 0.6s ease both;
+    transition: box-shadow 0.2s ease, background 0.3s ease, transform 0.2s ease;
   }
-  .card.visible { opacity: 1; transform: translateY(0); }
-  .card:hover { box-shadow: 0 16px 32px var(--shadow); }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.2s; }
+  .card:hover { box-shadow: 0 16px 32px var(teY(-4px); }
   .card.pbi { --accent: #f59e0b; }
   .card.sql { --accent: #3b82f6; }
-  .card.cl
-    letter-spacing: 0.5px; padding: 3px 10px; border-radius: 12px; margin-bottom: 12px;
-    background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
+  .card.cloud { --accent: #10b981; }
+
+  .card-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; padding: 3px 10px-bottom: 12px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
   }
   .card h3 { font-size: 16.5px; margin-bottom: 10px; }
   .card .stat { font-size: 26px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
@@ -126,11 +136,11 @@
     font-size: 13px; font-weight: 600; color: white;
     background: var(--accent); text-decoration: none;
     border-radius: 8px; padding: 9px 16px;
-    transition: opacity 0.15s ease, gap 0.15s ease;
+    transition: opacity 0.15s ease, gap 0.15
   }
   .card a.cta:hover { opacity: 0.88; gap: 9px; }
 
-  .footer { text-align: center; padding: 48px 24px 32px; font-size: 13px; color: var(--text-faint); }
+  .footer { text-align: center; padding: 48p color: var(--text-faint); }
   .footer a { color: #7c3aed; text-decoration: none; font-weight: 600; }
 </style>
 </head>
@@ -139,10 +149,10 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav class="topnav">
-  <a class="brand" href="#top">SP · Portfolio</a>
+  <a class="brand" href="#top">SP · Portfoli
   <div class="links">
     <a class="navlink" href="#skills">Compétences</a>
-    <a class="navlink" href="#projects">Projets</a>
+    <a class="navlink" href="#projects">Proj
     <button class="theme-toggle" id="themeToggle" title="Changer de thème">🌙</button>
   </div>
 </nav>
@@ -152,27 +162,19 @@
   <h1>Sophie Paradon</h1>
   <p class="tagline">Data Analyst en formation — SQL, Python, Power BI</p>
   <div class="skills-row">
-    <span class="skill-pill">SQL / BigQuery</span>
+    <span class="skill-pill">SQL / BigQuery<
     <span class="skill-pill">Python / Pandas</span>
-    <span class="skill-pill">Power BI / DAX</span>
+    <span class="skill-pill">Power BI / DAX<
     <span class="skill-pill">dbt</span>
     <span class="skill-pill">Google Cloud</span>
     <span class="skill-pill">Statistiques</span>
   </div>
   <div class="hero-ctas">
-    <a class="primary" href="#projects">Voir mes projets ↓</a>
-    <a class="secondary" href="https://github.com/sophie-paradon">Profil GitHub</a>
-  </div>
-</div>
-
-<div class="container" id="skills">
-  <h2 class="section-title">Compétences</h2>
-  <div class="skills-grid">
-    <div class="skill-card"><div class="icon">🗄️</div><h4>SQL / BigQuery</h4><p>Requêtes, jointures, window functions, DDL/DML</p></div>
-    <div cinteractifs</p></div>
+ <div class="skill-card"><div class="icon">📊</div><h4>Power BI / DAX</h4><p>Modélisation, mesures, dashboards interactifs</p></div>
     <div class="skill-card"><div class="icon">🔧</div><h4>dbt</h4><p>Modélisation en couches, transformations</p></div>
     <div class="skill-card"><div class="icon">☁️</div><h4>Google Cloud</h4><p>Cloud Functions, Cloud Run, Scheduler</p></div>
-    <div class="skill-card"><div class="icon">📈</div><h4>Statistiques</h4><p>Analyse exploratoire, tests, interprétation</p></div>
+    <div class="skill-card"><div class="icon">📈</div><h4>Statistiques</h4><p>Analyse exploratoire, tests,
+interprétation</p></div>
   </div>
 </div>
 
@@ -180,19 +182,7 @@
   <h2 class="section-title">Projets</h2>
 
   <div class="projects-grid">
-
-    <div class="card pbi">
-      <span class="card-tag">Power BI</span>
-      <h3>Cas Fil Rouge — Dashboard Power BI</h3>
-      <div class="stat">17,96%</div>
-      <div class="stat-label">marge commerciale (objectif : 20%)</div>
-      <p class="desc">Dashboard interactif pour une usine de câbles : suivi de facturation, rentabilité et analyse Pareto des clients les plus rentables.</p>
-      <a class="cta" href="https://github.com/sophie-paradon/cas-fil-rouge-powerbi">Voir le projet →</a>
-    </div>
-
-    <div class="card sql">
-      <span class="card-tag">SQL / BigQuery</span>
-      <h3>Delhi Market — Analyse SQL</h3>
+   <h3>Delhi Market — Analyse SQL</h3>
       <div class="stat">9/12</div>
       <div class="stat-label">mois sous l'objectif de vente (Clothing)</div>
       <p class="desc">Croissance et rentabilité d'une marketplace e-commerce : Electronics génère le plus de CA, Clothing est la catégorie la plus rentable.</p>
@@ -203,65 +193,16 @@
       <span class="card-tag">Cloud & BigQuery</span>
       <h3>Netflix Retention Pipeline</h3>
       <div class="stat">57,9%–72,7%</div>
-      <div class="stat-label">taux de rétention selon le pays</div>
-      <p class="desc">Pipeline automatisé (Cloud Scheduler + Cloud Run) qui recalcule chaque nuit le taux de rétention, sans intervention humaine.</p>
-      <a class="cta" href="https://github.com/sophie-paradon/netflix-retention-pipeline">Voir le projet →</a>
-    </div>
-
-  </div>
-</div>
-
-<div class="footer">Sophie Paradon — Portfolio Data Analyst · <a href="#top">Retour en haut ↑</a></div>
-
-<script>
-  // Scroll reveal
-  var revealEls = document.querySelectorAll('.card, .skill-card');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(function(el) { observer.observe(el); });
-
-  // Scroll progress bar
-  var progressBar = document.getElementById('progressBar');
-  window.addEventListener('scroll', function() {
+      <div class="stat-label">taux de rétent
+indow.addEventListener('scroll', function() {
     var h = document.documentElement;
     var scrollPercent = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
     progressBar.style.width = scrollPercent + '%';
   });
 
-  // Card tilt effect
-  document.querySelectorAll('.card').forEach(function(card) {
-    card.addEventListener('mousemove', function(e) {
-      var rect = card.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-      var rotateX = ((y / rect.height) - 0.5) * -6;
-      var rotateY = ((x / rect.width) - 0.5) * 6;
-      card.style.transform = 'perspective(600px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
-    });
-    card.addEventListener('mouseleave', function() {
-      card.style.transform = '';
-    });
-  });
-
   // Dark mode toggle
-  var themeToggle = document.getElementById('themeToggle');
-  var savedTheme = localStorage.getItem('theme');
-  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-
-  themeToggle.addEventListener('click', function() {
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    var next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+  var themeToggle = document.getElementById(
+ localStorage.setItem('theme', next);
     themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
   });
 </script>
