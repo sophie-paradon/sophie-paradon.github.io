@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sophie Paradon — Data Analyst</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -208,7 +207,9 @@
       <h3>Cas Fil Rouge — Dashboard Power BI</h3>
       <div class="stat-row"><span class="stat">17,96%</span></div>
       <div class="stat-label">marge commerciale (objectif : 20%)</div>
-      <p class="desc">Dashboard interactif pour une usine de câbles : suivi de facturation, rentabilité et analyse Pareto des clients les pl
+      <p class="desc">Dashboard interactif pour une usine de câbles : suivi de facturation, rentabilité et analyse Pareto des clients les plus rentables.</p>
+      <div class="stack">Power Query · Modèle en étoile · DAX · RLS/OLS</div>
+      <a class="cta" href="https://github.com/sophie-paradon/cas-fil-rouge-powerbi">Voir le projet →</a>
     </div>
 
     <div class="card sql">
@@ -262,7 +263,9 @@
     var next = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-    themeToggle.textConte
+    themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
   document.querySelectorAll('.card').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
       var rect = card.getBoundingClientRect();
