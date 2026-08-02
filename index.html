@@ -88,8 +88,6 @@
     font-size: 13px; font-weight: 700; color: #7c3aed; text-transform: uppercase;
     letter-spacing: 1.5px; margin-bottom: 28px; text-align: center;
   }
-
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 12px; }
   .skill-card {
     background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
     padding: 18px; text-align: center;
@@ -109,14 +107,13 @@
     padding: 26px; border-left: 4px solid var(--accent, #7c3aed);
     opacity: 0; transform: translateY(16px);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease, background 0.3s ease;
-    transform-style: p
+    transform-style: preserve-3d; will-change: transform;
+  }
+  .card.visible { opacity: 1; transform: translateY(0); }
   .card:hover { box-shadow: 0 16px 32px var(--shadow); }
   .card.pbi { --accent: #f59e0b; }
   .card.sql { --accent: #3b82f6; }
-  .card.cloud { --accent: #10b981; }
-
-  .card-tag {
-    display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  .card.cl
     letter-spacing: 0.5px; padding: 3px 10px; border-radius: 12px; margin-bottom: 12px;
     background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
   }
@@ -131,6 +128,8 @@
     border-radius: 8px; padding: 9px 16px;
     transition: opacity 0.15s ease, gap 0.15s ease;
   }
+  .card a.cta:hover { opacity: 0.88; gap: 9px; }
+
   .footer { text-align: center; padding: 48px 24px 32px; font-size: 13px; color: var(--text-faint); }
   .footer a { color: #7c3aed; text-decoration: none; font-weight: 600; }
 </style>
@@ -170,8 +169,7 @@
   <h2 class="section-title">Compétences</h2>
   <div class="skills-grid">
     <div class="skill-card"><div class="icon">🗄️</div><h4>SQL / BigQuery</h4><p>Requêtes, jointures, window functions, DDL/DML</p></div>
-    <div class="skill-card"><div class="icon">🐍</div><h4>Python / Pandas</h4><p>Nettoyage, manipulation, analyse de données</p></div>
-    <div class="skill-card"><div class="icon">📊</div><h4>Power BI / DAX</h4><p>Modélisation, mesures, dashboards interactifs</p></div>
+    <div cinteractifs</p></div>
     <div class="skill-card"><div class="icon">🔧</div><h4>dbt</h4><p>Modélisation en couches, transformations</p></div>
     <div class="skill-card"><div class="icon">☁️</div><h4>Google Cloud</h4><p>Cloud Functions, Cloud Run, Scheduler</p></div>
     <div class="skill-card"><div class="icon">📈</div><h4>Statistiques</h4><p>Analyse exploratoire, tests, interprétation</p></div>
