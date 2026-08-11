@@ -131,11 +131,13 @@
   .card:nth-child(2) { animation-delay: 0.15s; }
   .card:nth-child(3) { animation-delay: 0.25s; }
   .card:nth-child(4) { animation-delay: 0.35s; }
+  .card:nth-child(5) { animation-delay: 0.45s; }
   .card:hover { box-shadow: 0 20px 40px var(--shadow); transform: translateY(-5px); }
   .card.pbi { --accent: #f59e0b; }
   .card.sql { --accent: #3b82f6; }
   .card.cloud { --accent: #10b981; }
   .card.stats { --accent: #ec4899; }
+  .card.dbt { --accent: #06b6d4; }
 
   .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
   .card-icon {
@@ -218,14 +220,14 @@
 </div>
 
 <div class="ticker">
-  <div class="cell"><div class="num">4</div><div class="lbl">Études de cas</div></div>
-  <div class="cell"><div class="num">Power BI · SQL · Cloud · Stats</div><div class="lbl">Environnements couverts</div></div>
+  <div class="cell"><div class="num">5</div><div class="lbl">Études de cas</div></div>
+  <div class="cell"><div class="num">Power BI · SQL · Cloud · Stats · dbt</div><div class="lbl">Environnements couverts</div></div>
   <div class="cell"><div class="num">2026</div><div class="lbl">Formation Data Analyst certifiante — DataBird</div></div>
 </div>
 
 <div class="container" id="projects">
   <h2 class="section-title">Projets</h2>
-  <p class="section-sub">Quatre projets réalisés pendant ma formation Data Analyst</p>
+  <p class="section-sub">Cinq projets réalisés pendant ma formation Data Analyst</p>
 
   <div class="projects-grid">
 
@@ -279,6 +281,19 @@
       <p class="desc">Une nouvelle fonctionnalité d'écoute testée sur ~190 000 sessions, avec triple vérification de robustesse (abonnement, pays, temps) avant de trancher.</p>
       <div class="stack">Pandas · SciPy (test t) · IQR · Google Colab</div>
       <a class="cta" href="https://github.com/sophie-paradon/spotify-ab-testing">Voir le projet →</a>
+    </div>
+
+    <div class="card dbt">
+      <div class="card-top">
+        <div class="card-icon">🧱</div>
+        <span class="card-tag">dbt · Analytics Engineering</span>
+      </div>
+      <h3>Sales Database — Modélisation dbt</h3>
+      <div class="stat-row"><span class="stat">7 → 2</span></div>
+      <div class="stat-label">tables brutes transformées en tables KPI prêtes pour dashboard</div>
+      <p class="desc">Architecture en couches (staging → intermediate → mart) sur un dataset e-commerce, pour ne plus refaire les mêmes jointures à chaque question.</p>
+      <div class="stack">dbt Cloud · BigQuery · SQL</div>
+      <a class="cta" href="https://github.com/sophie-paradon/sales-database-dbt">Voir le projet →</a>
     </div>
 
   </div>
