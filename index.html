@@ -130,10 +130,12 @@
   .card:nth-child(1) { animation-delay: 0.05s; }
   .card:nth-child(2) { animation-delay: 0.15s; }
   .card:nth-child(3) { animation-delay: 0.25s; }
+  .card:nth-child(4) { animation-delay: 0.35s; }
   .card:hover { box-shadow: 0 20px 40px var(--shadow); transform: translateY(-5px); }
   .card.pbi { --accent: #f59e0b; }
   .card.sql { --accent: #3b82f6; }
   .card.cloud { --accent: #10b981; }
+  .card.stats { --accent: #ec4899; }
 
   .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
   .card-icon {
@@ -216,14 +218,14 @@
 </div>
 
 <div class="ticker">
-  <div class="cell"><div class="num">3</div><div class="lbl">Études de cas</div></div>
-  <div class="cell"><div class="num">Power BI · SQL · Cloud</div><div class="lbl">Environnements couverts</div></div>
+  <div class="cell"><div class="num">4</div><div class="lbl">Études de cas</div></div>
+  <div class="cell"><div class="num">Power BI · SQL · Cloud · Stats</div><div class="lbl">Environnements couverts</div></div>
   <div class="cell"><div class="num">2026</div><div class="lbl">Formation Data Analyst certifiante — DataBird</div></div>
 </div>
 
 <div class="container" id="projects">
   <h2 class="section-title">Projets</h2>
-  <p class="section-sub">Trois projets réalisés pendant ma formation Data Analyst</p>
+  <p class="section-sub">Quatre projets réalisés pendant ma formation Data Analyst</p>
 
   <div class="projects-grid">
 
@@ -264,6 +266,19 @@
       <p class="desc">Pipeline automatisé qui recalcule chaque nuit le taux de rétention, sans intervention humaine.</p>
       <div class="stack">Pandas · Cloud Functions/Run · Cloud Scheduler</div>
       <a class="cta" href="https://github.com/sophie-paradon/netflix-retention-pipeline">Voir le projet →</a>
+    </div>
+
+    <div class="card stats">
+      <div class="card-top">
+        <div class="card-icon">🎧</div>
+        <span class="card-tag">Python · Statistiques</span>
+      </div>
+      <h3>Spotify — A/B Testing</h3>
+      <div class="stat-row"><span class="stat">+4,56%</span></div>
+      <div class="stat-label">durée de session (p&lt;0,001) — déploiement recommandé</div>
+      <p class="desc">Une nouvelle fonctionnalité d'écoute testée sur ~190 000 sessions, avec triple vérification de robustesse (abonnement, pays, temps) avant de trancher.</p>
+      <div class="stack">Pandas · SciPy (test t) · IQR · Google Colab</div>
+      <a class="cta" href="https://github.com/sophie-paradon/spotify-ab-testing">Voir le projet →</a>
     </div>
 
   </div>
