@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sophie Paradon — Data Analyst</title>
+<meta name="description" content="Data Analyst en formation — Power BI, SQL/BigQuery et pipelines Cloud. Portfolio de trois études de cas avec démarche, résultats et recommandations.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sophie Paradon — Data Analyst">
+<meta property="og:description" content="Data Analyst en formation — Power BI, SQL/BigQuery et pipelines Cloud. Portfolio de trois études de cas avec démarche, résultats et recommandations.">
+<meta property="og:url" content="https://sophie-paradon.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sophie Paradon — Data Analyst">
+<meta name="twitter:description" content="Data Analyst en formation — Power BI, SQL/BigQuery et pipelines Cloud. Portfolio de trois études de cas avec démarche, résultats et recommandations.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -160,6 +168,20 @@
   .footer { text-align: center; padding: 52px 24px 36px; font-size: 13px; color: var(--text-faint); }
   .footer a { color: #7c3aed; text-decoration: none; font-weight: 600; }
 
+  .ticker {
+    max-width: 960px; margin: 0 auto; padding: 30px 24px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .ticker .cell { text-align: center; padding: 0 12px; border-left: 1px solid var(--card-border); }
+  .ticker .cell:first-child { border-left: none; }
+  .ticker .num { font-size: 22px; font-weight: 800; color: #7c3aed; letter-spacing: -0.3px; font-variant-numeric: tabular-nums; }
+  .ticker .lbl { font-size: 11.5px; color: var(--text-faint); margin-top: 4px; }
+  @media (max-width: 480px) {
+    .ticker { grid-template-columns: 1fr; gap: 18px; }
+    .ticker .cell { border-left: none; border-top: 1px solid var(--card-border); padding-top: 16px; }
+    .ticker .cell:first-child { border-top: none; padding-top: 0; }
+  }
+
   @media (max-width: 480px) {
     .hero h1 { font-size: 28px; }
     .hero { padding: 60px 20px 52px; }
@@ -185,12 +207,18 @@
   <span class="blob b2"></span>
   <div class="avatar">SP</div>
   <h1>Sophie Paradon</h1>
-  <p class="tagline">Data Analyst en formation — SQL, Python, Power BI</p>
+  <p class="tagline">Je transforme des données brutes en décisions — du cas métier au dashboard, à la requête ou au pipeline livré.</p>
   <p class="skills-inline">SQL / BigQuery<span class="sep">·</span>Python / Pandas<span class="sep">·</span>Power BI / DAX<span class="sep">·</span>dbt<span class="sep">·</span>Google Cloud<span class="sep">·</span>Statistiques</p>
   <div class="hero-ctas">
     <a class="primary" href="#projects">Voir mes projets ↓</a>
     <a class="secondary" href="https://github.com/sophie-paradon">Profil GitHub</a>
   </div>
+</div>
+
+<div class="ticker">
+  <div class="cell"><div class="num">3</div><div class="lbl">Études de cas</div></div>
+  <div class="cell"><div class="num">Power BI · SQL · Cloud</div><div class="lbl">Environnements couverts</div></div>
+  <div class="cell"><div class="num">2026</div><div class="lbl">Formation Data Analyst certifiante — DataBird</div></div>
 </div>
 
 <div class="container" id="projects">
