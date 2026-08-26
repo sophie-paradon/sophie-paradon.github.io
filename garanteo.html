@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garanteo — Optimiser 70 000 € d'acquisition digitale · Sophie Paradon</title>
+<meta name="description" content="Étude de cas : attribution multi-touch, statistique inférentielle et dashboard Power BI sur 70 000 € de budget d'acquisition réparti sur 13 campagnes.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Garanteo — Optimiser 70 000 € d'acquisition digitale">
+<meta property="og:description" content="Changer la règle d'attribution retourne le classement des campagnes. Étude de cas complète : notebook, dashboard Power BI, recommandations chiffrées.">
+<meta property="og:url" content="https://sophie-paradon.github.io/garanteo.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f7fb; --text: #17151f; --text-dim: #4b4859; --text-faint: #6f6c80;
+    --card-bg: #ffffff; --card-border: #e9e6f5; --nav-bg: rgba(247,247,251,0.8);
+    --shadow: rgba(76, 29, 149, 0.14); --hairline: rgba(124,58,237,0.14);
+    --soft: rgba(124,58,237,0.06);
+    --accent: #7c3aed; --accent2: #ec4899; --good: #059669; --bad: #dc2626;
+  }
+  [data-theme="dark"] {
+    --bg: #100e1a; --text: #f2f0fb; --text-dim: #c7c3dd; --text-faint: #948fb0;
+    --card-bg: #1a1729; --card-border: #2d2745; --nav-bg: rgba(16,14,26,0.8);
+    --shadow: rgba(0,0,0,0.45); --hairline: rgba(167,139,250,0.18);
+    --soft: rgba(167,139,250,0.08);
+    --accent: #a78bfa; --accent2: #f472b6; --good: #34d399; --bad: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text);
+    line-height: 1.7; transition: background .35s ease, color .35s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: #c4b5fd; color: #2e1065; }
+  img { max-width: 100%; display: block; }
+
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; z-index: 300;
+    background: linear-gradient(90deg,#7c3aed,#ec4899,#f59e0b); width: 0%; transition: width .1s ease; }
+
+  .topnav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center;
+    justify-content: space-between; padding: 14px 32px; background: var(--nav-bg);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); }
+  .topnav .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; color: var(--accent);
+    font-size: 14.5px; text-decoration: none; letter-spacing: -.2px; }
+  .topnav .brand .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .topnav .links { display: flex; align-items: center; gap: 22px; }
+  .topnav a.navlink { color: var(--text-dim); text-decoration: none; font-size: 13.5px; font-weight: 600; }
+  .topnav a.navlink:hover { color: var(--accent); }
+  .theme-toggle { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--card-border);
+    background: var(--card-bg); cursor: pointer; font-size: 14px; display: flex;
+    align-items: center; justify-content: center; transition: transform .2s ease; }
+  .theme-toggle:hover { transform: scale(1.08); }
+  @media (max-width: 620px) { .topnav { padding: 12px 18px; } .topnav a.navlink { display: none; } }
+
+  /* ---------------------------------------------------------------- HERO */
+  .hero { position: relative; overflow: hidden; color: #fff; padding: 92px 24px 84px; text-align: center;
+    background: linear-gradient(135deg,#4c1d95 0%,#5b21b6 35%,#7c3aed 70%,#9333ea 100%);
+    background-size: 240% 240%; animation: grad 16s ease infinite; }
+  @keyframes grad { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.07); animation: float 10s ease-in-out infinite; }
+  .hero .b1 { width: 420px; height: 420px; top: -230px; left: -120px; }
+  .hero .b2 { width: 300px; height: 300px; bottom: -190px; right: -70px; animation-delay: -5s; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(22px); } }
+  .hero > *:not(.blob) { position: relative; z-index: 1; }
+  .eyebrow { font-size: 11.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    opacity: .95; margin-bottom: 16px; animation: up .7s ease both; text-shadow: 0 1px 8px rgba(0,0,0,.25); }
+  .hero h1 { font-size: 52px; font-weight: 900; letter-spacing: -1.6px; line-height: 1.08;
+    margin-bottom: 16px; animation: up .7s ease .05s both; }
+  .hero .sub { font-size: 17.5px; opacity: 1; text-shadow: 0 1px 10px rgba(0,0,0,.18); max-width: 640px; margin: 0 auto 30px;
+    animation: up .7s ease .1s both; }
+  .hero .sub b { font-weight: 800; }
+  .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: up .7s ease .2s both; }
+  .ctas a { text-decoration: none; font-size: 13.5px; font-weight: 700; padding: 12px 22px;
+    border-radius: 10px; transition: transform .15s ease, box-shadow .15s ease; }
+  .ctas a:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.22); }
+  .ctas a.p { background: #fff; color: #6d28d9; }
+  .ctas a.s { background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.42); }
+  @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 620px) { .hero h1 { font-size: 34px; letter-spacing: -.8px; } .hero { padding: 68px 20px 60px; } .hero .sub { font-size: 15.5px; } }
+
+  /* ------------------------------------------------------------- TICKER */
+  .ticker { max-width: 1000px; margin: -34px auto 0; position: relative; z-index: 5;
+    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;
+    box-shadow: 0 18px 40px var(--shadow); display: grid; grid-template-columns: repeat(4,1fr);
+    padding: 24px 10px; }
+  .ticker .cell { text-align: center; padding: 0 14px; border-left: 1px solid var(--card-border); }
+  .ticker .cell:first-child { border-left: none; }
+  .ticker .n { font-size: 25px; font-weight: 900; color: var(--accent); letter-spacing: -.6px; font-variant-numeric: tabular-nums; }
+  .ticker .l { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; line-height: 1.4; }
+  @media (max-width: 720px) { .ticker { grid-template-columns: 1fr 1fr; gap: 20px 0; margin: -24px 16px 0; }
+    .ticker .cell:nth-child(3) { border-left: none; } }
+
+  /* ------------------------------------------------------------ LAYOUT */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .wide { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 78px 0 0; }
+  .kicker { font-size: 12px; font-weight: 800; color: var(--accent); text-transform: uppercase;
+    letter-spacing: 1.8px; margin-bottom: 10px; }
+  h2 { font-size: 33px; font-weight: 900; letter-spacing: -.9px; line-height: 1.18; margin-bottom: 16px; }
+  h3 { font-size: 20px; font-weight: 800; letter-spacing: -.3px; margin: 34px 0 10px; }
+  p { font-size: 16px; color: var(--text-dim); margin-bottom: 16px; }
+  p strong, li strong { color: var(--text); font-weight: 700; }
+  .lead { font-size: 18px; color: var(--text-dim); }
+  @media (max-width: 620px) { h2 { font-size: 25px; letter-spacing: -.5px; } p { font-size: 15px; } }
+
+  .quote { border-left: 3px solid var(--accent); padding: 6px 0 6px 22px; margin: 24px 0;
+    font-size: 19px; font-weight: 700; color: var(--text); letter-spacing: -.3px; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.on { opacity: 1; transform: none; }
+
+  /* --------------------------------------------------------- LE SWITCH */
+  .flip { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 30px 28px 34px; box-shadow: 0 20px 46px var(--shadow); margin-top: 26px; }
+  .switch { display: inline-flex; background: var(--soft); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 6px; }
+  .switch button { font-family: inherit; font-size: 13.5px; font-weight: 700; border: none;
+    background: transparent; color: var(--text-faint); padding: 9px 20px; border-radius: 9px;
+    cursor: pointer; transition: background .25s ease, color .25s ease; }
+  .switch button.on { background: var(--accent); color: #fff; }
+  .switch-note { font-size: 12.5px; color: var(--text-faint); margin: 10px 0 22px; }
+
+  .rank { position: relative; height: 528px; margin-bottom: 8px; }
+  .row { position: absolute; left: 0; right: 0; height: 40px; display: flex; align-items: center;
+    gap: 12px; transition: transform .75s cubic-bezier(.66,0,.16,1); will-change: transform; }
+  .row .pos { display: block; width: 26px; font-size: 12px; font-weight: 800; color: var(--text-faint);
+    font-variant-numeric: tabular-nums; text-align: right; }
+  .row .code { display: block; width: 74px; font-size: 12.5px; font-weight: 700; font-family: ui-monospace, monospace;
+    color: var(--text-dim); }
+  .row .track { display: block; flex: 1; height: 22px; background: var(--soft); border-radius: 6px; overflow: hidden; }
+  .row .bar { display: block; height: 100%; width: 0; border-radius: 6px; transition: width .75s cubic-bezier(.66,0,.16,1), background .5s ease; }
+  .row .val { display: block; width: 66px; text-align: right; font-size: 13px; font-weight: 800;
+    font-variant-numeric: tabular-nums; transition: color .5s ease; }
+  .row.star .code, .row.star .val { color: var(--accent2); }
+  .row.star .pos { color: var(--accent2); }
+  @media (max-width: 620px) {
+    .rank { height: 470px; } .row { height: 36px; gap: 8px; }
+    .row .code { width: 62px; font-size: 11.5px; } .row .val { width: 56px; font-size: 12px; }
+    .flip { padding: 22px 16px 26px; }
+  }
+  .shot { margin-top: 22px; border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden;
+    background: var(--soft); }
+  .shot img { transition: opacity .35s ease; }
+  .caption { font-size: 12.5px; color: var(--text-faint); margin-top: 10px; text-align: center; }
+
+  /* -------------------------------------------------------- FINDINGS */
+  .finds { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 26px; }
+  @media (min-width: 780px) { .finds { grid-template-columns: 1fr 1fr; } }
+  .find { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;
+    padding: 26px 24px; position: relative; overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease; }
+  .find:hover { transform: translateY(-4px); box-shadow: 0 18px 38px var(--shadow); }
+  .find::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c, var(--accent)); }
+  .find .big { font-size: 34px; font-weight: 900; color: var(--c, var(--accent)); letter-spacing: -1px; line-height: 1.1; }
+  .find .cap { font-size: 12px; color: var(--text-faint); margin-bottom: 12px; }
+  .find p { font-size: 14.5px; margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14.5px; }
+  th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--text-faint); font-weight: 800; padding: 10px 12px; border-bottom: 2px solid var(--card-border); }
+  td { padding: 11px 12px; border-bottom: 1px solid var(--hairline); color: var(--text-dim); }
+  td:first-child { color: var(--text); font-weight: 600; }
+  tr:hover td { background: var(--soft); }
+  code { font-family: ui-monospace, monospace; font-size: .9em; background: var(--soft);
+    padding: 2px 6px; border-radius: 5px; color: var(--accent); }
+  .tw { overflow-x: auto; }
+
+  /* ------------------------------------------------------- DASHBOARD */
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tabs button { font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-faint);
+    padding: 8px 14px; border-radius: 9px; transition: all .2s ease; }
+  .tabs button:hover { border-color: var(--accent); color: var(--accent); }
+  .tabs button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .panel { display: none; animation: up .45s ease both; }
+  .panel.on { display: block; }
+  .panel .txt { font-size: 15px; color: var(--text-dim); margin-bottom: 16px; }
+
+  /* ----------------------------------------------------------- LIMITS */
+  .limits { background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 18px;
+    padding: 30px 28px; margin-top: 24px; }
+  .limits ul { list-style: none; }
+  .limits li { font-size: 15px; color: var(--text-dim); padding: 10px 0 10px 28px; position: relative;
+    border-bottom: 1px solid var(--hairline); }
+  .limits li:last-child { border-bottom: none; }
+  .limits li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+
+  /* -------------------------------------------------------------- END */
+  .end { margin: 80px 0 0; padding: 54px 28px; text-align: center; color: #fff; border-radius: 22px;
+    background: linear-gradient(135deg,#4c1d95,#7c3aed 60%,#9333ea); }
+  .end h2 { font-size: 27px; margin-bottom: 10px; }
+  .end p { color: rgba(255,255,255,.9); font-size: 15.5px; max-width: 520px; margin: 0 auto 24px; }
+  .footer { text-align: center; padding: 46px 24px 40px; font-size: 13px; color: var(--text-faint); }
+  .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="pb"></div>
+
+<nav class="topnav">
+  <a class="brand" href="index.html"><span class="dot"></span>Sophie Paradon</a>
+  <div class="links">
+    <a class="navlink" href="index.html">← Tous les projets</a>
+    <a class="navlink" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale">Le dépôt</a>
+    <button class="theme-toggle" id="tt" title="Changer de thème">🌙</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="blob b1"></span><span class="blob b2"></span>
+  <p class="eyebrow">Projet final · Formation Data Analyst DataBird</p>
+  <h1>70 000 €.<br>13 campagnes.<br>Aucun moyen de les comparer.</h1>
+  <p class="sub">Garanteo croyait payer <b>372 €</b> pour acquérir un client. Elle en payait <b>389 €</b>.
+  Et son classement de campagnes <b>s'inversait</b> selon la règle d'attribution choisie.</p>
+  <div class="ctas">
+    <a class="p" href="#bascule">Voir la démonstration ↓</a>
+    <a class="s" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale">Le dépôt complet</a>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="cell"><div class="n">70 000 €</div><div class="l">de budget analysé sur 2023</div></div>
+  <div class="cell"><div class="n">1,78 M</div><div class="l">de points de données</div></div>
+  <div class="cell"><div class="n">389 €</div><div class="l">le coût d'acquisition réel</div></div>
+  <div class="cell"><div class="n">11 %</div><div class="l">du budget réalloué, sans dépense</div></div>
+</div>
+
+<div class="wrap">
+
+<section class="reveal">
+  <p class="kicker">Le point de départ</p>
+  <h2>Une demande trop vague pour être analysée</h2>
+  <p class="lead">Garanteo, assureur français fondé en 2015, dépense 70 000 € par an en acquisition
+  digitale sur 13 campagnes Google Ads et affiliation. La révision budgétaire est dans trois semaines.
+  La demande arrive sous cette forme : <em>« affiner notre stratégie d'acquisition digitale »</em>.</p>
+  <p>Impossible d'analyser ça tel quel. J'ai appliqué la méthode des cinq pourquoi pour remonter du
+  symptôme à la cause, jusqu'à obtenir une question qui, elle, a une réponse mesurable :</p>
+  <div class="quote">Garanteo ne peut pas comparer objectivement ses 13 campagnes entre elles.</div>
+  <p>Trois sous-questions en découlent, et ce sont elles qui structurent tout le projet :
+  combien coûte réellement un client, campagne par campagne ? Le classement dépend-il de la règle
+  d'attribution retenue ? Et le pitch téléphonique fait-il baisser la conversion ?</p>
+</section>
+
+<section class="reveal">
+  <p class="kicker">Avant même d'analyser</p>
+  <h2>Le nettoyage déplace déjà la décision</h2>
+  <p>Onze mille neuf cent soixante-quatre lignes supprimées, soit <strong>9,4 % du volume</strong>,
+  et une seule d'entre elles a demandé un vrai arbitrage : les 100 identifiants de prospects en double.
+  Parmi eux, <strong>huit clients étaient comptés deux fois</strong>.</p>
+  <div class="finds">
+    <div class="find" style="--c:#dc2626">
+      <div class="big">372 € → 389 €</div>
+      <div class="cap">le coût d'acquisition, avant et après dédoublonnage</div>
+      <p>Le fichier brut comptait 188 clients au lieu de 180. Un écart de <strong>4,4 %</strong> obtenu
+      sans toucher au budget, uniquement en corrigeant le dénominateur. C'est sur ces chiffres faux
+      que Garanteo arbitrait.</p>
+    </div>
+    <div class="find" style="--c:#059669">
+      <div class="big">2 colonnes</div>
+      <div class="cap">vides à 38 %, volontairement non corrigées</div>
+      <p>Les remplir par la valeur la plus fréquente n'aurait pas été une approximation : c'aurait été
+      affirmer que 8 700 personnes utilisaient Windows, ce que je ne sais pas. Ma règle de conduite :
+      <strong>ne modifier que ce que je peux justifier</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <p class="kicker">Le verrou technique</p>
+  <h2>Le lien entre la dépense et le client n'existe pas</h2>
+  <p>Les demandes de rappel — les conversions — portent <strong>toutes</strong> un identifiant de
+  campagne vide, sans une seule exception. Impossible de savoir directement quelle campagne a converti
+  un prospect. Le lien doit être <strong>reconstruit</strong> : on repart de la personne devenue
+  cliente, on retrouve ses clics précédents qui, eux, portent une campagne, on les trie par date,
+  et on en choisit un. Selon une règle.</p>
+  <div class="tw"><table>
+    <tr><th>Règle</th><th>Ce qu'elle garde</th><th>À quelle question elle répond</th></tr>
+    <tr><td>Premier contact</td><td>la plus ancienne touche</td><td>qui a fait <em>découvrir</em> Garanteo ?</td></tr>
+    <tr><td>Dernier contact</td><td>la plus récente avant conversion</td><td>qui a fait <em>basculer</em> le prospect ?</td></tr>
+    <tr><td>Multi-touch</td><td>toutes</td><td>lesquelles ont <em>participé</em> ?</td></tr>
+  </table></div>
+  <p>Ce choix n'a rien d'anodin : <strong>91 % des prospects ont vu plusieurs campagnes</strong> avant
+  de convertir, 3,9 en moyenne et jusqu'à 7. Pour plus de neuf prospects sur dix, la question « quelle
+  campagne l'a converti ? » n'a pas de réponse évidente.</p>
+</section>
+
+</div>
+
+<section id="bascule" class="reveal">
+  <div class="wide">
+    <p class="kicker">La conclusion centrale</p>
+    <h2>Changez la règle, le classement s'inverse</h2>
+    <p class="lead">Mêmes personnes, mêmes données, même code. Seule la colonne qu'on regarde change.
+    Cliquez sur l'autre règle et regardez le portefeuille se retourner.</p>
+
+    <div class="flip">
+      <div class="switch">
+        <button id="bPrem" class="on" onclick="setRegle('premier')">Premier contact</button>
+        <button id="bDern" onclick="setRegle('dernier')">Dernier contact</button>
+      </div>
+      <p class="switch-note">Coût d'acquisition par campagne, de la moins chère à la plus chère.
+      <span style="color:var(--accent2);font-weight:700">Les deux campagnes en rose</span> sont celles qui traversent tout le classement.</p>
+
+      <div class="rank" id="rank"></div>
+
+      <div class="shot"><img id="shot" src="assets/garanteo/premier.webp"
+        alt="Page 2 du dashboard Power BI, segment sur premier contact"></div>
+      <p class="caption" id="cap">La page 2 du dashboard, segment d'attribution sur « premier contact ».</p>
+    </div>
+
+    <div class="wrap" style="padding-left:0;padding-right:0">
+      <p style="margin-top:26px"><code>acb1a5969d</code> passe de la <strong>dernière</strong> à la
+      <strong>première</strong> place, son coût par client tombe de 700 € à 175 €. Pendant ce temps
+      <code>45c82b38c6</code>, qui pèse 7 000 €, glisse jusqu'au dernier rang. Et le coût d'acquisition
+      global, lui, <strong>ne bouge pas d'un centime</strong> : ni le budget ni le nombre de clients
+      n'ont changé. Seul le mérite qu'on leur attribue a changé de destinataire.</p>
+      <div class="quote">Deux analystes sur les mêmes données peuvent recommander de couper des campagnes
+      opposées, et avoir raison tous les deux.</div>
+      <p>C'est pour cette raison que ma première recommandation n'est pas un nom de campagne.
+      C'est <strong>d'acter une règle</strong>. Et que je n'ai ensuite recommandé que ce qui reste vrai
+      sous les trois règles à la fois.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<section class="reveal">
+  <p class="kicker">Ce qui pilote vraiment le coût</p>
+  <h2>La conversion, pas le prix du clic</h2>
+  <p>Le coût d'acquisition se décompose exactement en deux facteurs : le coût par prospect, et le taux
+  de conversion. Restait à savoir lequel des deux commande. La réponse est sans ambiguïté.</p>
+  <div class="tw"><table>
+    <tr><th>Relation testée</th><th>Coefficient</th><th>p-value</th><th>Verdict</th></tr>
+    <tr><td>CAC ~ taux de conversion</td><td>Pearson <strong>−0,906</strong></td><td>&lt; 0,001</td><td>Significatif : explique 82 % de la variance</td></tr>
+    <tr><td>CAC ~ coût par prospect</td><td>Pearson +0,12</td><td>0,71</td><td>Non significatif</td></tr>
+    <tr><td>Budget ~ taux de conversion</td><td>Spearman <strong>−0,64</strong></td><td>0,024</td><td>Rendement décroissant démontré</td></tr>
+  </table></div>
+  <p>Conséquence opérationnelle immédiate : <strong>renégocier les enchères Google Ads ne changerait
+  presque rien</strong>. Le seul levier est de déplacer le budget vers ce qui convertit. Et comme le
+  rendement est décroissant, cette réallocation doit se faire par paliers, avec mesure à chaque étape,
+  jamais d'un coup.</p>
+</section>
+
+<section class="reveal">
+  <p class="kicker">La contre-intuition</p>
+  <h2>Un écart que je refuse d'appeler un résultat</h2>
+  <p>Les prospects qui reçoivent un pitch téléphonique convertissent <em>moins</em> que ceux qui n'en
+  reçoivent pas : 7,18 % contre 9,47 %. L'inverse de ce qu'on attendrait. J'ai donc lancé
+  <strong>quatre tests indépendants</strong> plutôt qu'un seul.</p>
+  <div class="finds">
+    <div class="find" style="--c:#f59e0b">
+      <div class="big">0,073 – 0,103</div>
+      <div class="cap">les quatre p-values obtenues</div>
+      <p>Khi-deux, test t de Welch, test exact de Fisher, test de proportions. Toutes au-dessus du seuil
+      de 5 %. <strong>L'écart reste compatible avec le hasard de l'échantillon.</strong> Il est
+      documenté comme une piste à tester, pas comme un résultat.</p>
+    </div>
+    <div class="find" style="--c:#dc2626">
+      <div class="big">68 %</div>
+      <div class="cap">des prospects jamais joints au téléphone</div>
+      <p>Le vrai sujet est probablement là, et pas dans le contenu du pitch. Sur 100 prospects créés,
+      32 seulement sont réellement joints. C'est le plus gros trou de l'entonnoir, et il n'apparaissait
+      dans aucune analyse existante.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<section class="reveal">
+  <div class="wide">
+    <p class="kicker">Le livrable</p>
+    <h2>Un dashboard, pas un rapport</h2>
+    <p class="lead">Mes conclusions sont bornées par les effectifs : 180 clients répartis sur 13
+    campagnes, c'est peu. Dans six mois, avec deux fois plus de clients, les écarts deviendront
+    mesurables. Un rapport serait périmé ; le dashboard, non. Sept pages, une par question, plus une
+    page d'infobulle. 13 tables en étoile, 49 mesures DAX.</p>
+
+    <div class="tabs" id="tabs"></div>
+    <div id="panels"></div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<section class="reveal">
+  <p class="kicker">Ce que je recommande</p>
+  <h2>Cinq décisions, à budget total inchangé</h2>
+  <p>Les 70 000 € ne bougent pas. Seule leur répartition change.</p>
+  <div class="tw"><table>
+    <tr><th>#</th><th>Recommandation</th><th>Montant</th><th>Sur quoi elle repose</th></tr>
+    <tr><td>1</td><td>Acter une règle d'attribution</td><td>—</td><td>Sans elle, aucun classement n'est opposable</td></tr>
+    <tr><td>2</td><td>Couper <code>ca98f07be2</code></td><td>700 €</td><td>0 client sur 25 prospects, dernière sous les 3 règles</td></tr>
+    <tr><td>3</td><td>Réduire <code>45c82b38c6</code> par paliers</td><td>7 000 €</td><td>CAC de 583 €, soit 50 % au-dessus de la moyenne</td></tr>
+    <tr><td>4</td><td>Tester la montée de <code>9fa01fb1a0</code></td><td>—</td><td>Meilleur rang moyen avec un volume crédible</td></tr>
+    <tr><td>5</td><td>Test A/B sur le pitch, après la joignabilité</td><td>—</td><td>Écart non significatif, à instrumenter proprement</td></tr>
+  </table></div>
+  <div class="finds">
+    <div class="find" style="--c:#7c3aed">
+      <div class="big">+9,5 clients</div>
+      <div class="cap">pour zéro euro supplémentaire</div>
+      <p>7 700 € redéployés, soit 11 % du budget. Au coût d'acquisition de référence de 359 €, ces
+      mêmes euros produisent 21,5 clients au lieu de 12. Le coût global passe de <strong>389 € à
+      369 €</strong>.</p>
+    </div>
+    <div class="find" style="--c:#6b7280">
+      <div class="big">Et sa réserve</div>
+      <div class="cap">annoncée avant qu'on me la demande</div>
+      <p>Ce chiffrage suppose que les campagnes qui reçoivent le budget tiennent leur CAC à volume plus
+      élevé. Or la corrélation budget/conversion dit l'inverse. <strong>Le gain réel sera inférieur à
+      9,5 clients.</strong> D'où les paliers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <p class="kicker">La partie qu'on cache d'habitude</p>
+  <h2>Ce que l'analyse ne permet pas d'affirmer</h2>
+  <p>Cette section fait partie du livrable. Elle n'est pas un aveu de faiblesse, c'est ce qui rend le
+  reste crédible.</p>
+  <div class="limits">
+    <ul>
+      <li><strong>Aucune campagne ne convertit significativement différemment des autres</strong>
+      (khi-deux global p = 0,38 ; V de Cramér = 0,08). Avec 180 clients sur 13 campagnes, les effectifs
+      sont trop faibles pour trancher campagne par campagne.</li>
+      <li>Mes recommandations sont donc <strong>les meilleures décisions possibles sous incertitude</strong>,
+      pas des vérités démontrées. C'est précisément pourquoi elles ne retiennent que ce qui reste vrai
+      sous les trois règles d'attribution.</li>
+      <li>Le coût par clic n'est pas fourni : il est <strong>reconstitué</strong> en divisant le budget
+      par le nombre de clics. Je le signale plutôt que de le présenter comme une donnée.</li>
+      <li>La durée de session est plafonnée à 60,0 minutes par l'outil de collecte. Les sessions plus
+      longues sont invisibles : c'est une limite de la mesure, pas un comportement des visiteurs.</li>
+      <li>381 événements n'ont pas de type. Dans le pire des cas, une étape de l'entonnoir bougerait de
+      +10,8 % au maximum. <strong>Incertitude bornée et documentée</strong>, plutôt qu'ignorée.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="end reveal">
+  <h2>Tout est ouvert et vérifiable</h2>
+  <p>Le notebook s'affiche directement dans GitHub, sorties et graphiques compris. Chaque chiffre de
+  cette page remonte à une cellule.</p>
+  <div class="ctas">
+    <a class="p" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale">Le dépôt complet</a>
+    <a class="s" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale/blob/main/02_Notebooks/main.ipynb">Le notebook</a>
+    <a class="s" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale/blob/main/04_Dashboard/Garanteo_Sophie_Paradon.pdf">Le dashboard en PDF</a>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <a href="index.html">← Retour au portfolio</a> · Sophie Paradon — Data Analyst ·
+  <a href="https://github.com/sophie-paradon">GitHub</a><br>
+  <span style="opacity:.7">Données fictives, fournies dans un cadre pédagogique.</span>
+</div>
+
+<script>
+/* ------------------------------------------------ thème */
+var root = document.documentElement, tt = document.getElementById('tt');
+function theme(t) { root.setAttribute('data-theme', t); tt.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {} }
+try { var s = localStorage.getItem('theme'); if (s) theme(s);
+  else if (matchMedia('(prefers-color-scheme: dark)').matches) theme('dark'); } catch (e) {}
+tt.onclick = function () { theme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); };
+
+/* ------------------------------------------------ barre de progression */
+addEventListener('scroll', function () {
+  var h = document.body.scrollHeight - innerHeight;
+  document.getElementById('pb').style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+});
+
+/* ------------------------------------------------ le classement qui bascule */
+var DATA = [
+  { c: 'acb1a5', premier: 700, dernier: 175, star: 1 },
+  { c: '7db5e1', premier: 700, dernier: 233 },
+  { c: '242649', premier: 467, dernier: 280 },
+  { c: '7b9f59', premier: 583, dernier: 318 },
+  { c: '67bac7', premier: 350, dernier: 373 },
+  { c: 'f115ad', premier: 280, dernier: 382 },
+  { c: '9fa01f', premier: 269, dernier: 389 },
+  { c: 'f11dac', premier: 455, dernier: 396 },
+  { c: '951375', premier: 350, dernier: 400 },
+  { c: '73dc9e', premier: 311, dernier: 420 },
+  { c: 'f28414', premier: 525, dernier: 485 },
+  { c: '45c82b', premier: 438, dernier: 583, star: 1 }
+];
+var H = innerWidth < 620 ? 36 : 40, rank = document.getElementById('rank'), rows = {};
+DATA.forEach(function (d) {
+  var el = document.createElement('div');
+  el.className = 'row' + (d.star ? ' star' : '');
+  el.innerHTML = '<span class="pos"></span><span class="code">' + d.c +
+    '</span><span class="track"><span class="bar"></span></span><span class="val"></span>';
+  rank.appendChild(el); rows[d.c] = el;
+});
+function couleur(v) {
+  var t = Math.min(1, Math.max(0, (v - 175) / (700 - 175)));
+  return 'hsl(' + (152 - t * 152) + ',' + (58 + t * 14) + '%,' + (46 - t * 4) + '%)';
+}
+function setRegle(r) {
+  document.getElementById('bPrem').classList.toggle('on', r === 'premier');
+  document.getElementById('bDern').classList.toggle('on', r === 'dernier');
+  var tri = DATA.slice().sort(function (a, b) { return a[r] - b[r]; });
+  tri.forEach(function (d, i) {
+    var el = rows[d.c], v = d[r];
+    el.style.transform = 'translateY(' + (i * H) + 'px)';
+    el.querySelector('.pos').textContent = (i + 1);
+    el.querySelector('.val').textContent = v + ' €';
+    el.querySelector('.val').style.color = couleur(v);
+    var b = el.querySelector('.bar');
+    b.style.width = (v / 700 * 100) + '%';
+    b.style.background = couleur(v);
+  });
+  var img = document.getElementById('shot');
+  img.style.opacity = 0;
+  setTimeout(function () { img.src = 'assets/garanteo/' + r + '.webp'; img.style.opacity = 1; }, 200);
+  document.getElementById('cap').textContent = 'La page 2 du dashboard, segment d’attribution sur ' +
+    (r === 'premier' ? '« premier contact ».' : '« dernier contact ».');
+}
+setRegle('premier');
+
+/* ------------------------------------------------ les 7 pages du dashboard */
+var PAGES = [
+  ['1 · Vue d’ensemble', 'p1', 'L’entonnoir de 6 720 visiteurs à 180 clients, les cinq indicateurs de cadrage et le volume mensuel. C’est le point d’entrée de l’équipe acquisition, chaque mois.'],
+  ['2 · Coût d’acquisition', 'p2', 'Le CAC de chaque campagne, avec un verdict et un indice de fiabilité calculés en DAX. Le segment en haut à gauche bascule entre les trois règles et recalcule tout le rapport.'],
+  ['3 · Règle d’attribution', 'p3', 'Le même budget vu sous les trois règles, côte à côte, plus le rang moyen de chaque campagne. C’est la page qui fonde la première recommandation.'],
+  ['4 · Le pitch', 'p4', 'Les quatre tests statistiques, leurs p-values, et la lecture honnête de ce qu’ils permettent ou non de conclure. La jauge de joignabilité y révèle un levier plus important que le pitch.'],
+  ['5 · Scénario', 'p5', 'La réallocation recalculée en direct : 7 700 € redéployés, +9,5 clients, le CAC global qui passe de 389 € à 369 €. Avec la réserve affichée à côté du résultat.'],
+  ['6 · Suivi mensuel', 'p6', 'L’évolution sur l’année avec les cumuls en Time Intelligence, et la démonstration que le prix du clic n’explique rien du coût du client.'],
+  ['7 · Qualité des données', 'p7', 'Les indicateurs bruts contre les corrigés, les corrections appliquées, celles qui ont été refusées, et ce que ces données ne permettent pas de dire.'],
+  ['Infobulle', 'infobulle', 'Au survol d’une campagne, dans n’importe quel visuel, une page masquée affiche son détail complet : budget, prospects, clients, CAC, verdict et fiabilité.']
+];
+var tabs = document.getElementById('tabs'), panels = document.getElementById('panels');
+PAGES.forEach(function (p, i) {
+  var b = document.createElement('button');
+  b.textContent = p[0];
+  b.onclick = function () { onglet(i); };
+  tabs.appendChild(b);
+  var d = document.createElement('div');
+  d.className = 'panel';
+  d.innerHTML = '<p class="txt">' + p[2] + '</p><div class="shot"><img loading="lazy" src="assets/garanteo/' +
+    p[1] + '.webp" alt="Dashboard Garanteo, page ' + p[0] + '"></div>';
+  panels.appendChild(d);
+});
+function onglet(i) {
+  [].forEach.call(tabs.children, function (b, j) { b.classList.toggle('on', i === j); });
+  [].forEach.call(panels.children, function (d, j) { d.classList.toggle('on', i === j); });
+}
+onglet(0);
+
+/* ------------------------------------------------ apparition au défilement */
+var io = new IntersectionObserver(function (es) {
+  es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+[].forEach.call(document.querySelectorAll('.reveal'), function (el) { io.observe(el); });
+</script>
+</body>
+</html>

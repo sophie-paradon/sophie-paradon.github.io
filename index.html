@@ -141,6 +141,46 @@
   .card.dbt { --accent: #06b6d4; }
   .card.upcoming { --accent: #9ca3af; border-style: dashed; opacity: 0.88; }
   .card.garanteo { --accent: #8b5cf6; }
+
+  /* ---- bloc vedette : le projet final ---- */
+  .featured {
+    position: relative; overflow: hidden; border-radius: 20px; margin-bottom: 46px;
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    box-shadow: 0 22px 50px var(--shadow);
+    display: grid; grid-template-columns: 1fr; gap: 0;
+    animation: fadeInUp .7s ease both;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .featured:hover { transform: translateY(-4px); box-shadow: 0 30px 62px var(--shadow); }
+  .featured::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, #7c3aed, #ec4899, #f59e0b); z-index: 2; }
+  @media (min-width: 860px) { .featured { grid-template-columns: 1.05fr 0.95fr; } }
+  .featured .fx { padding: 34px 32px 32px; display: flex; flex-direction: column; justify-content: center; }
+  .featured .ftag { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
+    font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.1px;
+    color: #7c3aed; background: rgba(124,58,237,.11); padding: 5px 11px; border-radius: 20px;
+    margin-bottom: 15px; }
+  .featured h3 { font-size: 25px; font-weight: 800; letter-spacing: -.6px; line-height: 1.22; margin-bottom: 12px; }
+  .featured .fdesc { font-size: 14.5px; color: var(--text-dim); margin-bottom: 20px; }
+  .featured .fstats { display: flex; gap: 26px; flex-wrap: wrap; margin-bottom: 22px;
+    padding-top: 18px; border-top: 1px solid var(--hairline); }
+  .featured .fstats div { min-width: 78px; }
+  .featured .fstats .v { font-size: 21px; font-weight: 900; color: #7c3aed; letter-spacing: -.4px;
+    font-variant-numeric: tabular-nums; line-height: 1.2; }
+  .featured .fstats .k { font-size: 10.5px; color: var(--text-faint); line-height: 1.35; }
+  .featured .fcta { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
+    font-size: 13.5px; font-weight: 700; color: #fff; text-decoration: none;
+    background: linear-gradient(135deg, #7c3aed, #9333ea); border-radius: 10px; padding: 12px 22px;
+    transition: gap .15s ease, box-shadow .15s ease; }
+  .featured .fcta:hover { gap: 11px; box-shadow: 0 10px 22px rgba(124,58,237,.35); }
+  .featured .fimg { position: relative; overflow: hidden; min-height: 230px;
+    background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+  .featured .fimg img { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: left top; opacity: .96; }
+  .featured .fimg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(115deg, rgba(76,29,149,.34) 0%, rgba(76,29,149,0) 46%); }
+  @media (max-width: 860px) { .featured .fimg { min-height: 190px; order: -1; }
+    .featured .fx { padding: 28px 24px 26px; } .featured h3 { font-size: 21px; } }
   .card.upcoming .stat { font-size: 17px; }
 
   .card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
@@ -234,7 +274,30 @@
 </div>
 
 <div class="container" id="projects">
-  <h2 class="section-title">Projets</h2>
+  <h2 class="section-title">Projet vedette</h2>
+  <p class="section-sub">Le projet final de la formation, mené en solo du cadrage à la soutenance</p>
+
+  <a class="featured" href="garanteo.html" style="text-decoration:none;color:inherit">
+    <div class="fx">
+      <span class="ftag">🎯 Étude de cas complète</span>
+      <h3>Garanteo — 70 000 €, 13 campagnes, aucun moyen de les comparer</h3>
+      <p class="fdesc">Le lien entre la dépense et le client n'existait nulle part dans les données.
+      Je l'ai reconstruit par attribution multi-touch — et découvert que <strong>changer la règle
+      retourne entièrement le classement des campagnes</strong>. Une campagne passe de la dernière à
+      la première place sans qu'un euro ait bougé.</p>
+      <div class="fstats">
+        <div><div class="v">389 €</div><div class="k">le CAC réel,<br>et non 372 €</div></div>
+        <div><div class="v">−0,906</div><div class="k">corrélation CAC /<br>taux de conversion</div></div>
+        <div><div class="v">11 %</div><div class="k">du budget réalloué,<br>+9,5 clients</div></div>
+      </div>
+      <span class="fcta">Lire l'étude de cas →</span>
+    </div>
+    <div class="fimg">
+      <img loading="lazy" src="assets/garanteo/dernier.webp" alt="Aperçu du dashboard Power BI Garanteo">
+    </div>
+  </a>
+
+  <h2 class="section-title" style="margin-top:8px">Projets</h2>
   <p class="section-sub">6 études de cas sélectionnées sur 14 semaines de formation intensive</p>
 
   <div class="projects-grid">
@@ -314,7 +377,7 @@
       <div class="stat-label">le coût d'acquisition réel, et non 372 € — 11% du budget réalloué</div>
       <p class="desc">70 000 € répartis sur 13 campagnes, sans aucun lien traçable entre la dépense et le client. Attribution multi-touch reconstruite, et démonstration que changer de règle retourne entièrement le classement des campagnes.</p>
       <div class="stack">Pandas · SciPy · Power BI/DAX · Attribution multi-touch</div>
-      <a class="cta" href="https://github.com/sophie-paradon/projet-garanteo-acquisition-digitale">Voir le projet →</a>
+      <a class="cta" href="garanteo.html">Lire l'étude de cas →</a>
     </div>
 
   </div>
