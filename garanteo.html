@@ -55,7 +55,7 @@
 
   /* ---------------------------------------------------------------- HERO */
   .hero { position: relative; overflow: hidden; color: #fff; padding: 92px 24px 84px; text-align: center;
-    background: linear-gradient(135deg,#4c1d95 0%,#5b21b6 35%,#7c3aed 70%,#9333ea 100%);
+    background: linear-gradient(135deg,#2e1065 0%,#4c1d95 38%,#5b21b6 72%,#6d28d9 100%);
     background-size: 240% 240%; animation: grad 16s ease infinite; }
   @keyframes grad { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
   .hero .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.07); animation: float 10s ease-in-out infinite; }
@@ -63,11 +63,13 @@
   .hero .b2 { width: 300px; height: 300px; bottom: -190px; right: -70px; animation-delay: -5s; }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(22px); } }
   .hero > *:not(.blob) { position: relative; z-index: 1; }
-  .eyebrow { font-size: 11.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-    color: #fff; opacity: .88; margin-bottom: 16px; animation: up .7s ease both; }
+  .eyebrow { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 1.8px;
+    text-transform: uppercase; color: #fff; background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25); padding: 6px 15px; border-radius: 30px;
+    margin-bottom: 20px; animation: up .7s ease both; }
   .hero h1 { font-size: 52px; font-weight: 900; letter-spacing: -1.6px; line-height: 1.08;
     margin-bottom: 16px; animation: up .7s ease .05s both; }
-  .hero .sub { font-size: 17.5px; color: #fff; opacity: .95; max-width: 640px; margin: 0 auto 30px;
+  .hero .sub { font-size: 18px; font-weight: 500; color: #fff; max-width: 660px; margin: 0 auto 30px;
     animation: up .7s ease .1s both; }
   .hero .sub b { font-weight: 800; }
   .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: up .7s ease .2s both; }
@@ -193,6 +195,9 @@
   .end p { color: rgba(255,255,255,.9); font-size: 15.5px; max-width: 520px; margin: 0 auto 24px; }
   .footer { text-align: center; padding: 46px 24px 40px; font-size: 13px; color: var(--text-faint); }
   .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+  /* ---- verrou de contraste : ces deux <p> sont sur fond sombre ---- */
+  header.hero p.eyebrow, header.hero p.sub { color: #fff; opacity: 1; }
+  header.hero p.sub b { color: #fff; }
 </style>
 </head>
 <body>
